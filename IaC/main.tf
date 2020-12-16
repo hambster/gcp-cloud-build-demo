@@ -5,5 +5,5 @@ provider "google" {
 module "vpc" {
   source  = "vpc"
   project = "${var.project}"
-  env     = "${local.env}"
+  env     = "${var.env}"
 }
