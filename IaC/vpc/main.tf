@@ -12,4 +12,8 @@ module "vpc" {
       subnet_region = "us-west1"
     },
   ]
+
+  secondary_ranges = {
+    "${var.env}-subnet-01" = []
+  }
 }
