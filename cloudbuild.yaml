@@ -10,8 +10,8 @@ steps:
   - '-c'
   - |
       cd IaC
-      sed -i s/PROJECT_ID/$PROJECT_ID/g terraform.tfvars
-      sed -i s/BRANCH/$BRANCH_NAME/g terraform.tfvars
+      echo "project=\"$PROJECT_ID\"" > terraform.tfvars
+      echo "env=\"$BRANCH_NAME\"" >> terraform.tfvars
       cat terraform.tfvars
       terraform init
 - id: 'tf plan'
@@ -21,8 +21,8 @@ steps:
   - '-c'
   - |
       cd IaC
-      sed -i s/PROJECT_ID/$PROJECT_ID/g terraform.tfvars
-      sed -i s/BRANCH/$BRANCH_NAME/g terraform.tfvars
+      echo "project=\"$PROJECT_ID\"" > terraform.tfvars
+      echo "env=\"$BRANCH_NAME\"" >> terraform.tfvars
       cat terraform.tfvars
       terraform plan
 - id: 'tf apply'
@@ -32,7 +32,7 @@ steps:
   - '-c'
   - |
       cd IaC
-      sed -i s/PROJECT_ID/$PROJECT_ID/g terraform.tfvars
-      sed -i s/BRANCH/$BRANCH_NAME/g terraform.tfvars
+      echo "project=\"$PROJECT_ID\"" > terraform.tfvars
+      echo "env=\"$BRANCH_NAME\"" >> terraform.tfvars
       cat terraform.tfvars
       terraform apply -auto-approve
