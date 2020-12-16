@@ -10,8 +10,12 @@ steps:
   - '-c'
   - |
       cd IaC
+      branch="dev";
+      if [ "$BRANCH_NAME" == "main" ]; then
+          branch="main";
+      fi
       echo "project=\"$PROJECT_ID\"" > terraform.tfvars
-      echo "env=\"$BRANCH_NAME\"" >> terraform.tfvars
+      echo "env=\"$branch\"" >> terraform.tfvars
       cat terraform.tfvars
       terraform init
 - id: 'tf plan'
@@ -21,8 +25,12 @@ steps:
   - '-c'
   - |
       cd IaC
+      branch="dev";
+      if [ "$BRANCH_NAME" == "main" ]; then
+          branch="main";
+      fi
       echo "project=\"$PROJECT_ID\"" > terraform.tfvars
-      echo "env=\"$BRANCH_NAME\"" >> terraform.tfvars
+      echo "env=\"$branch\"" >> terraform.tfvars
       cat terraform.tfvars
       terraform plan
 - id: 'tf apply'
@@ -32,7 +40,11 @@ steps:
   - '-c'
   - |
       cd IaC
+      branch="dev";
+      if [ "$BRANCH_NAME" == "main" ]; then
+          branch="main";
+      fi
       echo "project=\"$PROJECT_ID\"" > terraform.tfvars
-      echo "env=\"$BRANCH_NAME\"" >> terraform.tfvars
+      echo "env=\"$branch\"" >> terraform.tfvars
       cat terraform.tfvars
       terraform apply -auto-approve
