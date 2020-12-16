@@ -12,6 +12,7 @@ steps:
       cd IaC
       sed -i s/PROJECT_ID/$PROJECT_ID/g terraform.tfvars
       sed -i s/BRANCH/$BRANCH_NAME/g terraform.tfvars
+      cat terraform.tfvars
       terraform init
 - id: 'tf plan'
   name: 'hashicorp/terraform:0.11.14'
@@ -22,6 +23,7 @@ steps:
       cd IaC
       sed -i s/PROJECT_ID/$PROJECT_ID/g terraform.tfvars
       sed -i s/BRANCH/$BRANCH_NAME/g terraform.tfvars
+      cat terraform.tfvars
       terraform plan
 - id: 'tf apply'
   name: 'hashicorp/terraform:0.11.14'
@@ -32,4 +34,5 @@ steps:
       cd IaC
       sed -i s/PROJECT_ID/$PROJECT_ID/g terraform.tfvars
       sed -i s/BRANCH/$BRANCH_NAME/g terraform.tfvars
+      cat terraform.tfvars
       terraform apply -auto-approve
