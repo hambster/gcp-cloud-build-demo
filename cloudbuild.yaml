@@ -1,7 +1,53 @@
 steps:
-- name: gcr.io/cloud-builders/gcloud
+- id: 'acquire api token from secret manager'
+  name: gcr.io/cloud-builders/gcloud
   entrypoint: 'bash'
   args: [ '-c', "gcloud secrets versions access latest --secret=whitesource-api-key --format='get(payload.data)' | tr '_-' '/+' | base64 -d > decrypted-data.txt" ]
-- name: gcr.io/cloud-builders/gcloud
-  entrypoint: 'bash'
-  args: [ '-c', 'cat decrypted-data.txt']
+- id: 'tf init'
+  name: 'hashicorp/terraform:0.11.14'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      cd IaC
+      branch="dev";
+      echo "$_BASE_BRANCH";
+      if [ "$_BASE_BRANCH" == "main" ]; then
+          branch="main";
+      fi
+      echo "project=\"$PROJECT_ID\"" > terraform.tfvars
+      echo "env=\"$branch\"" >> terraform.tfvars
+      cat terraform.tfvars
+      terraform init
+- id: 'tf plan'
+  name: 'hashicorp/terraform:0.11.14'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      cd IaC
+      branch="dev";
+      echo "$_BASE_BRANCH";
+      if [ "$_BASE_BRANCH" == "main" ]; then
+          branch="main";
+      fi
+      echo "project=\"$PROJECT_ID\"" > terraform.tfvars
+      echo "env=\"$branch\"" >> terraform.tfvars
+      cat terraform.tfvars
+      terraform plan
+- id: 'tf apply'
+  name: 'hashicorp/terraform:0.11.14'
+  entrypoint: 'sh'
+  args:
+  - '-c'
+  - |
+      cd IaC
+      branch="dev";
+      echo "$_BASE_BRANCH";
+      if [ "$_BASE_BRANCH" == "main" ]; then
+          branch="main";
+      fi
+      echo "project=\"$PROJECT_ID\"" > terraform.tfvars
+      echo "env=\"$branch\"" >> terraform.tfvars
+      cat terraform.tfvars
+      terraform apply -auto-approve
