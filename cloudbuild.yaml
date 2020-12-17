@@ -11,6 +11,7 @@ steps:
   - |
       cd IaC
       branch="dev";
+      echo "$BRANCH_NAME";
       if [ "$BRANCH_NAME" == "main" ]; then
           branch="main";
       fi
@@ -26,6 +27,7 @@ steps:
   - |
       cd IaC
       branch="dev";
+      echo "$BRANCH_NAME";
       if [ "$BRANCH_NAME" == "main" ]; then
           branch="main";
       fi
@@ -41,6 +43,7 @@ steps:
   - |
       cd IaC
       branch="dev";
+      echo "$BRANCH_NAME";
       if [ "$BRANCH_NAME" == "main" ]; then
           branch="main";
       fi
