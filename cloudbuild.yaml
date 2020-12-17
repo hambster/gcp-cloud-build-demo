@@ -11,8 +11,8 @@ steps:
   - |
       cd IaC
       branch="dev";
-      echo "$BRANCH_NAME";
-      if [ "$BRANCH_NAME" == "main" ]; then
+      echo "$_BASE_BRANCH";
+      if [ "$_BASE_BRANCH" == "main" ]; then
           branch="main";
       fi
       echo "project=\"$PROJECT_ID\"" > terraform.tfvars
@@ -27,8 +27,8 @@ steps:
   - |
       cd IaC
       branch="dev";
-      echo "$BRANCH_NAME";
-      if [ "$BRANCH_NAME" == "main" ]; then
+      echo "$_BASE_BRANCH";
+      if [ "$_BASE_BRANCH" == "main" ]; then
           branch="main";
       fi
       echo "project=\"$PROJECT_ID\"" > terraform.tfvars
@@ -43,8 +43,8 @@ steps:
   - |
       cd IaC
       branch="dev";
-      echo "$BRANCH_NAME";
-      if [ "$BRANCH_NAME" == "main" ]; then
+      echo "$_BASE_BRANCH";
+      if [ "$_BASE_BRANCH" == "main" ]; then
           branch="main";
       fi
       echo "project=\"$PROJECT_ID\"" > terraform.tfvars
